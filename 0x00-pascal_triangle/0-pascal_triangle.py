@@ -15,4 +15,3 @@ def pascal_triangle(n):
         temp.append(1)
         matrix.append(temp)
     return matrix
-
