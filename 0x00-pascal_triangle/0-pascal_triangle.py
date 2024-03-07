@@ -7,9 +7,9 @@ def pascal_triangle(n):
         return matrix
     matrix = [[1]]
 
-        for i in range(1, n):
+    for i in range(1, n):
         temp = [1]
-                for j in range(len(matrix[i - 1]) - 1):
+        for j in range(len(matrix[i - 1]) - 1):
             curr = matrix[i - 1]
             temp.append(matrix[i - 1][j] + matrix[i - 1][j + 1])
         temp.append(1)
