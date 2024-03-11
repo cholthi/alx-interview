@@ -1,17 +1,11 @@
 #!/usr/bin/python3
 
 def pascal_triangle(n):
-    matrix = []
-
-    if n <= 0:
-        return matrix
     matrix = [[1]]
-
     for i in range(1, n):
-        temp = [1]
-        for j in range(len(matrix[i - 1]) - 1):
-            curr = matrix[i - 1]
-            temp.append(matrix[i - 1][j] + matrix[i - 1][j + 1])
-        temp.append(1)
-        matrix.append(temp)
+        temp = [0] + matrix[-1] + [0]
+        row = []
+        for j in range(len(matrix[-1]) + 1):
+            row.append(temp[j] + temp[j + 1])
+        matrix.append(row)
     return matrix
