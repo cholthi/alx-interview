@@ -1,13 +1,13 @@
 #!/usr/bin/python3
 
 def pascal_triangle(n):
-    matrix = [[1]]
-    if (n == 1):
-        return matrix
-    for i in range(1, n):
-        temp = [0] + matrix[-1] + [0]
-        row = []
-        for j in range(len(matrix[-1]) + 1):
-            row.append(temp[j] + temp[j + 1])
-        matrix.append(row)
-    return matrix
+    if n == 0:
+        return []
+    if n == 1:
+        return [[1]]
+    prevRows = pascal_triangle(n - 1)
+    newRow = [1] * n
+    for i in range(1, n - 1):
+        newRow[i] = prevRows[-1][i - 1] + prevRows[-1][i]
+    prevRows.append(newRow)
+    return prevRows
