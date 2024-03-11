@@ -2,6 +2,8 @@
 
 def pascal_triangle(n):
     matrix = [[1]]
+    if (n == 1):
+        return matrix
     for i in range(1, n):
         temp = [0] + matrix[-1] + [0]
         row = []
