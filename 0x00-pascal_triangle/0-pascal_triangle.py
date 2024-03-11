@@ -1,7 +1,10 @@
 #!/usr/bin/python3
+"""
+function to generate n rows of pascal's triangle"""
+
 
 def pascal_triangle(n):
-    """ Returns `n` of the pascal's triangle""" 
+    """ Returns `n` of the pascal's triangle"""
     if n == 0:
         return []
     if n == 1:
