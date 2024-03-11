@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 
 def pascal_triangle(n):
+    """ Returns `n` of the pascal's triangle""" 
     if n == 0:
         return []
     if n == 1:
