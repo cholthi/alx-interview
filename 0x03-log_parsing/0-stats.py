@@ -4,7 +4,7 @@ import re
 
 
 def get_chunk(n_lines):
-    """Returns interator that emits 10 lines from 
+    """Returns interator that emits 10 lines from
     the file object at a time. """
     chuck = []
     line_no = 0
@@ -17,6 +17,7 @@ def get_chunk(n_lines):
         chuck.append(str(line))
         if line_no % n_lines == 0:
             yield chuck
+
 
 def extract_data(chuck):
     """extract data from the lines in chuck"""
@@ -35,7 +36,6 @@ def extract_data(chuck):
         if match:
             data_stats.append(match.groupdict())
     return data_stats
-
 
 
 def process_chunk(chuck, status_codes, total_file_size):
@@ -57,9 +57,9 @@ def print_chuck(size, status_codes):
         if feq > 0:
             print('{:s}: {:d}'.format(status_code, feq), flush=True)
 
+
 def compute_stats(stats, status_codes, file_size):
     """Compute the printable final stats from list of raw stats"""
-    #file_size = 0
     for stat in stats:
         status = stat.get('status_code', 0)
         if status in status_codes:
@@ -68,11 +68,7 @@ def compute_stats(stats, status_codes, file_size):
     return file_size
 
 
-
-
-
 if __name__ == '__main__':
-   
     file_size = 0
     status_codes = {
             '200': 0,
@@ -84,7 +80,6 @@ if __name__ == '__main__':
             '405': 0,
             '500': 0,
         }
-    
     try:
         for chunk in get_chunk(10):
             file_size += process_chunk(chunk, status_codes, file_size)
