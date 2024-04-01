@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/python3
 """ Parses logs from stdin and outputs useful data from it"""
 import re
 
