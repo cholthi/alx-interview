@@ -6,21 +6,32 @@ from typing import List
 
 def validUTF8(data: List) -> bool:
     """validates if data is valid utf-8 encoding"""
-    n_bytes = 0
+    def is_continuation(byte):
+        """ is it a continuation? """
+        return (byte & 0b11000000) == 0b10000000
+
+    def get_bytes_to_follow(start_byte):
+        """ Get the bytes to follow """
+        if (start_byte & 0b10000000) == 0b00000000:
+            return 0
+        elif (start_byte & 0b11100000) == 0b11000000:
+            return 1
+        elif (start_byte & 0b11110000) == 0b11100000:
+            return 2
+        elif (start_byte & 0b11111000) == 0b11110000:
+            return 3
+        return -1
+    bytes_to_follow = 0
+
     for byte in data:
-        if n_bytes > 0:
-            if byte >> 6 != 0b10:
+        if bytes_to_follow == 0:
+            bytes_to_follow = get_bytes_to_follow(byte)
+            if bytes_to_follow == -1:
                 return False
-            n_bytes -= 1
+            elif bytes_to_follow == 0:
+                continue
         else:
-            if byte >> 7 == 0:
-                n_bytes = 0
-            elif byte >> 5 == 0b110:
-                n_bytes = 1
-            elif byte >> 4 == 0b1110:
-                n_bytes = 2
-            elif byte >> 3 == 0b11110:
-                n_bytes = 3
-            else:
+            if not is_continuation(byte):
                 return False
-    return n_bytes == 0
+            bytes_to_follow -= 1
+    return bytes_to_follow == 0
