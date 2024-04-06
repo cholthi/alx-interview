@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-""" Provides a function to validate if data is in 
+""" Provides a function to validate if data is in
 valid utf-8 encoding"""
 
 
@@ -22,4 +22,4 @@ def validUTF8(data):
                 n_bytes = 3
             else:
                 return False
-    return n_bytes ==  0
+    return n_bytes == 0
