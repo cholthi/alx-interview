@@ -2,10 +2,9 @@
 """
 Provides function to rotate 2d matrix
 """
-from typing import List
 
 
-def rotate_2d_matrix(matrix: List[List[int]]) -> None:
+def rotate_2d_matrix(matrix):
     """ Roate 2d matrix
     """
     no_rows = len(matrix)
