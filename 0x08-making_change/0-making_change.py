@@ -16,6 +16,6 @@ def makeChange(coins: List[int], total: int) -> int:
     """
     dp = [0] + [total + 1] * total
     for coin in coins:
-      for i in range(coin, total + 1):
-        dp[i] = min(dp[i], dp[i - coin] + 1)
+        for i in range(coin, total + 1):
+            dp[i] = min(dp[i], dp[i - coin] + 1)
     return -1 if dp[total] == total + 1 else dp[total]
