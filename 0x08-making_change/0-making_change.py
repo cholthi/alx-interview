@@ -2,6 +2,7 @@
 """ The coin change problem solution
 """
 from typing import List
+import math
 
 
 def makeChange(coins: List[int], total: int) -> int:
@@ -14,8 +15,14 @@ def makeChange(coins: List[int], total: int) -> int:
 
     Return: int - Num of coins for change
     """
-    dp = [0] + [total + 1] * total
-    for coin in coins:
-        for i in range(coin, total + 1):
-            dp[i] = min(dp[i], dp[i - coin] + 1)
-    return -1 if dp[total] == total + 1 else dp[total]
+    def coinChangeInner(rem, cache):
+        if rem < 0:
+            return math.inf
+        if rem == 0:
+            return 0
+        if rem in cache:
+            return cache[rem]
+        cache[rem] = min(coinChangeInner(rem-x, cache) + 1 for x in coins)
+        return cache[rem]
+    ans = coinChangeInner(total, {})
+    return -1 if ans == math.inf else ans
